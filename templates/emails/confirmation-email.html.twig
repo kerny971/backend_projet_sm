@@ -1,0 +1,16 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<div>
+    <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: auto; padding: 15px;">
+        <h1 style="color: #333; font-size: 20px;">Confirmation de votre inscription</h1>
+        <p style="color: #555; line-height: 1.5;">Bonjour {{ firstname }},</p>
+        <p style="color: #555; line-height: 1.5;">Merci de vous être inscrit ! Veuillez utiliser le code ci-dessous pour confirmer votre adresse email :</p>
+        <div style="line-height: 1.5; display: inline-block; background-color: #e9ecef; font-weight: bold; color: #333; padding: 10px; margin: 10px 0; letter-spacing: 4px;">{{ code }}</div>
+        <p style="color: #555; line-height: 1.5;">Ce code est valable {{ duration_code }} après réception de ce message. Si vous n'avez pas créé ce compte sur la plateforme <a href="{{ url_app }}">Solar Meet</a>, vous pouvez ignorer cet email.</p>
+        <p style="color: #555; line-height: 1.5;">Cordialement,<br><br/>Solar Meet</p>
+    </div>
+</div>
+</html>
