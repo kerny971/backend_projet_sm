@@ -3,7 +3,6 @@
 namespace App\Event;
 
 use App\DTO\ConfirmationEmailDTO;
-use App\DTO\ContactDTO;
 
 class EmailCodeConfirmationRequestEvent
 {

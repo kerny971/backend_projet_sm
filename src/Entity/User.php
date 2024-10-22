@@ -93,17 +93,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: MeetingOrder::class, mappedBy: 'user')]
     private Collection $meetingOrders;
 
-    /**
-     * @var Collection<int, MailConfirmation>
-     */
-    #[ORM\OneToMany(targetEntity: MailConfirmation::class, mappedBy: 'user')]
-    private Collection $mailConfirmations;
 
     public function __construct()
     {
         $this->meetingOffers = new ArrayCollection();
         $this->meetingOrders = new ArrayCollection();
-        $this->mailConfirmations = new ArrayCollection();
     }
 
 
@@ -327,36 +321,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($meetingOrder->getUser() === $this) {
                 $meetingOrder->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, MailConfirmation>
-     */
-    public function getMailConfirmations(): Collection
-    {
-        return $this->mailConfirmations;
-    }
-
-    public function addMailConfirmation(MailConfirmation $mailConfirmation): static
-    {
-        if (!$this->mailConfirmations->contains($mailConfirmation)) {
-            $this->mailConfirmations->add($mailConfirmation);
-            $mailConfirmation->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMailConfirmation(MailConfirmation $mailConfirmation): static
-    {
-        if ($this->mailConfirmations->removeElement($mailConfirmation)) {
-            // set the owning side to null (unless already changed)
-            if ($mailConfirmation->getUser() === $this) {
-                $mailConfirmation->setUser(null);
             }
         }
 

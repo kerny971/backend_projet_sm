@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class CheckUser {
 
-    private $user;
+    private Object $user;
 
     public function __construct(array $payload, UserRepository $userRepo) {
         $this->user = $userRepo->find($payload['id']);

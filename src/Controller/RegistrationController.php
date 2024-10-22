@@ -83,7 +83,6 @@ class RegistrationController extends AbstractController
                 'groups' => ['user.create']
             ]);
         }
-        
 
         # check User Entity Data
         $errors = $validator->validate($user);

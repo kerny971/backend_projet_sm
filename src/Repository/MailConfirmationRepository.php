@@ -2,42 +2,33 @@
 
 namespace App\Repository;
 
-use App\Entity\MailConfirmation;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\MongoDBException;
+use Doctrine\ODM\MongoDB\Repository\DocumentRepository;
+use App\Document\MailConfirmation;
 
-/**
- * @extends ServiceEntityRepository<MailConfirmation>
- */
-class MailConfirmationRepository extends ServiceEntityRepository
+class MailConfirmationRepository extends DocumentRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(DocumentManager $dm)
     {
-        parent::__construct($registry, MailConfirmation::class);
+        parent::__construct($dm, $dm->getUnitOfWork(), $dm->getClassMetadata(MailConfirmation::class));
     }
 
-//    /**
-//     * @return MailConfirmation[] Returns an array of MailConfirmation objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('m.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?MailConfirmation
-//    {
-//        return $this->createQueryBuilder('m')
-//            ->andWhere('m.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * @throws MongoDBException
+     */
+    public function findLastThreeEntries(string $user_id, \DateTime $dateTime, int $limit): int
+    {
+        return $this->createQueryBuilder()
+            ->field('user')->equals($user_id)
+            ->field('createdAt')->gt($dateTime->getTimestamp())
+            ->sort('timestamp', 'desc')
+            ->limit($limit)
+            ->count()
+            ->getQuery()
+            ->execute();
+    }
 }
+
+
+?>

@@ -199,7 +199,8 @@ class DashboardController extends AbstractController
     }
 
 
-    private function _getErrorAccess () {
+    private function _getErrorAccess (): array
+    {
         if (count($this->errorAccess) > 0) {
 
             # Données Response HTTP

@@ -38,3 +38,7 @@ services:
 
     App\Validator\SlugConstraintValidator:
         tags: ['validator.constraint_validator']
+
+    App\Repository\MailConfirmationRepository:
+        arguments:
+            $dm: '@doctrine_mongodb.odm.document_manager'
